@@ -63,7 +63,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     // MARK: - Private Methods
     
     private func setupLayout() {
-        contentView.layer.cornerRadius = 4
+        contentView.layer.cornerRadius = Constants.cornerRadius
         
         contentView.addSubview(containerView)
         containerView.addSubview(photoImageView)

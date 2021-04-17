@@ -9,7 +9,7 @@ import UIKit
 
 extension Constants {
     enum Colors {
-        static let green = UIColor(hex: "#30B030")
+        static let green = UIColor(hex: "#66C05D")
         static let gray = UIColor(hex: "#F2F3F5")
     }
 }

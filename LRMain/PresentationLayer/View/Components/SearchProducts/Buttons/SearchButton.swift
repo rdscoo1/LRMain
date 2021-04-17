@@ -1,5 +1,5 @@
 //
-//  NextButton.swift
+//  SearchButton.swift
 //  LRMain
 //
 //  Created by Roman Khodukin on 17.04.2021.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class NextButton: UIButton {
-
+class SearchButton: UIButton {
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
@@ -21,20 +21,12 @@ class NextButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Life cycle
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        layer.cornerRadius = self.frame.height / 2
-    }
-    
     // MARK: - Private Method
     
     private func setupUI() {
+        layer.cornerRadius = Constants.cornerRadius
         backgroundColor = Constants.Colors.green
-        setImage(.arrow, for: .normal)
+        setImage(.searchIcon, for: .normal)
         tintColor = .white
     }
-
 }

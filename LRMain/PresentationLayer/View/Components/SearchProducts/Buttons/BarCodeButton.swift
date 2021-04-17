@@ -1,5 +1,5 @@
 //
-//  SearchButton.swift
+//  BarCodeButton.swift
 //  LRMain
 //
 //  Created by Roman Khodukin on 17.04.2021.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class SearchButton: UIButton {
-    
+class BarCodeButton: UIButton {
+
     // MARK: - Init
     
     override init(frame: CGRect) {
@@ -24,9 +24,9 @@ class SearchButton: UIButton {
     // MARK: - Private Method
     
     private func setupUI() {
-        layer.cornerRadius = 8
-        backgroundColor = Constants.Colors.green
-        setImage(.searchIcon, for: .normal)
-        tintColor = .white
+        layer.cornerRadius = Constants.cornerRadius
+        backgroundColor = .white
+        setImage(.barcodeIcon, for: .normal)
+        tintColor = .black
     }
 }

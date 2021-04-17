@@ -23,10 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func createNavigationController() -> UINavigationController {
         let mainViewController = MainViewController()
-        mainViewController.title = "Поиск"
-        
         let navigationController = UINavigationController(rootViewController: mainViewController)
-        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.navigationBar.isHidden = true
 
         return navigationController
     }

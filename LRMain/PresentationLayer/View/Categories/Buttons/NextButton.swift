@@ -1,5 +1,5 @@
 //
-//  BarCodeButton.swift
+//  NextButton.swift
 //  LRMain
 //
 //  Created by Roman Khodukin on 17.04.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BarCodeButton: UIButton {
+class NextButton: UIButton {
 
     // MARK: - Init
     
@@ -21,12 +21,20 @@ class BarCodeButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life cycle
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layer.cornerRadius = frame.height / 2
+    }
+    
     // MARK: - Private Method
     
     private func setupUI() {
-        layer.cornerRadius = 8
-        backgroundColor = .white
-        setImage(.barcodeIcon, for: .normal)
-        tintColor = .black
+        backgroundColor = Constants.Colors.green
+        setImage(.arrow, for: .normal)
+        tintColor = .white
     }
+
 }

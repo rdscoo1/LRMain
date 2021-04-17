@@ -11,14 +11,6 @@ class CategoryView: UIView {
     
     // MARK: - UI
     
-    private lazy var containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Constants.Colors.gray
-        view.clipsToBounds = true
-        return view
-    }()
-    
     private lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +36,7 @@ class CategoryView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        setupLayout()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -61,28 +53,27 @@ class CategoryView: UIView {
     
     // MARK: - Private Methods
     
+    private func setupView() {
+        backgroundColor = Constants.Colors.gray
+        clipsToBounds = true
+        layer.cornerRadius = Constants.cornerRadius
+
+        setupLayout()
+    }
+    
     private func setupLayout() {
-        containerView.layer.cornerRadius = offset / 4
-        
-        addSubview(containerView)
-        containerView.addSubview(categoryLabel)
-        containerView.addSubview(categoryImageView)
+        addSubview(categoryLabel)
+        addSubview(categoryImageView)
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: topAnchor),
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-
-            categoryLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: offset),
-            categoryLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: offset),
-            categoryLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -offset),
+            categoryLabel.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+            categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
+            categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset),
             
             categoryImageView.heightAnchor.constraint(equalToConstant: offset * 6),
             categoryImageView.widthAnchor.constraint(equalToConstant: offset * 6),
-            categoryImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: offset * 2),
-            categoryImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: offset)
+            categoryImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: offset * 2),
+            categoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: offset)
         ])
     }
 }
-

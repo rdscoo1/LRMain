@@ -23,8 +23,10 @@ class MainViewController: UIViewController {
         tableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: CategoriesTableViewCell.reuseId)
         tableView.register(ProductsTableViewCell.self, forCellReuseIdentifier: ProductsTableViewCell.reuseId)
         tableView.separatorStyle = .none
+        tableView.contentInsetAdjustmentBehavior = .never
         tableView.dataSource = self
         tableView.delegate = self
+//        tableView.addTopBounceAreaView(color: Constants.Colors.green)
         return tableView
     }()
     
@@ -40,11 +42,26 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = Constants.Colors.green
         
         setupLayout()
+        addTopBounceAreaView()
     }
     
+    
+    
     // MARK: - Private Methods
+    
+//    background color for the top of a UITableView
+    private func addTopBounceAreaView() {
+        var frame = UIScreen.main.bounds
+        frame.origin.y = -frame.size.height
+
+        let view = UIView(frame: frame)
+        view.backgroundColor = Constants.Colors.green
+        
+        tableView.addSubview(view)
+    }
     
     private func setupLayout() {
         view.addSubview(tableView)
@@ -108,34 +125,36 @@ extension MainViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension MainViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch sections[section] {
-//        case .categories:
-//            return nil
-//        case .limitedOffer:
-//            return "Предложение ограничено"
-//        case .bestPrice:
-//            return "Лучшая цена"
-//        }
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch sections[section] {
+        case .categories:
+            return 224
+        case .limitedOffer:
+            return 64
+        case .bestPrice:
+            return 64
+        }
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch sections[section] {
         case .categories:
-            return nil
+            let categoriesHeaderView = SearchProductsHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 218))
+            return categoriesHeaderView
         case .limitedOffer:
-            let headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 32))
-            headerView.setTitle("Предложение ограничено")
-            return headerView
+            let productsHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 32))
+            productsHeaderView.setTitle("Предложение ограничено")
+            return productsHeaderView
         case .bestPrice:
-            let headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 32))
-            headerView.setTitle("Лучшая цена")
-            return headerView
+            let productsHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 32))
+            productsHeaderView.setTitle("Лучшая цена")
+            return productsHeaderView
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 212
+        
+        return 192
         
     }
 }

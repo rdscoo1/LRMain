@@ -38,7 +38,9 @@ class CategoriesTableViewCell: UITableViewCell {
     
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 128, height: 128)
+        layout.itemSize = CGSize(width: 128, height: 124)
+        layout.minimumLineSpacing = 16
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         layout.scrollDirection = .horizontal
         return layout
     }()
@@ -70,8 +72,8 @@ class CategoriesTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
         ])
     }
     
@@ -110,7 +112,7 @@ extension CategoriesTableViewCell: UICollectionViewDataSource {
             
             let category = items[indexPath.item]
             categoryCell.configure(with: category)
-                        
+            
             return categoryCell
         case .watchAll:
             guard let watchAllCell = collectionView.dequeueReusableCell(withReuseIdentifier: WatchAllCollectionViewCell.reuseId, for: indexPath) as? WatchAllCollectionViewCell else {
