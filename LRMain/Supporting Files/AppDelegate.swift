@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func createNavigationController() -> UINavigationController {
-        let mainViewController = MainViewController()
+        let mainViewController = MainTabBarViewController()
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.navigationBar.isHidden = true
 

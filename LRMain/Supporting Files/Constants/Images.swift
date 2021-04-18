@@ -9,11 +9,19 @@ import UIKit
 
 extension UIImage {
     
+    // MARK: - TabBar
+    
+    static let bookmarkIcon = UIImage(imageLiteralResourceName: "bookmarkIcon")
+    static let personIcon = UIImage(imageLiteralResourceName: "personIcon")
+    static let searchIcon = UIImage(imageLiteralResourceName: "searchIcon")
+    static let cartIcon = UIImage(imageLiteralResourceName: "cartIcon")
+    static let shopIcon = UIImage(imageLiteralResourceName: "shopIcon")
+    
     // MARK: - Icons
     
     static let arrow = UIImage(imageLiteralResourceName: "arrow")
     static let barcodeIcon = UIImage(imageLiteralResourceName: "barcodeIcon")
-    static let searchIcon = UIImage(imageLiteralResourceName: "searchIcon")
+    static let searchMagnifier = UIImage(imageLiteralResourceName: "searchMagnifier")
     static let bulletListIcon = UIImage(imageLiteralResourceName: "bulletListIcon")
     
     // MARK: - Catalog

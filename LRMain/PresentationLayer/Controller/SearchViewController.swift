@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  SearchViewController.swift
 //  LRMain
 //
 //  Created by Roman Khodukin on 16.04.2021.
@@ -13,7 +13,7 @@ enum Sections {
     case bestPrice([Product])
 }
 
-class MainViewController: UIViewController {
+class SearchViewController: UIViewController {
     
     // MARK: - UI
     
@@ -22,16 +22,25 @@ class MainViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: CategoriesTableViewCell.reuseId)
         tableView.register(ProductsTableViewCell.self, forCellReuseIdentifier: ProductsTableViewCell.reuseId)
+        tableView.allowsSelection = false
         tableView.separatorStyle = .none
         tableView.contentInsetAdjustmentBehavior = .never
+        tableView.keyboardDismissMode = .onDrag
         tableView.dataSource = self
         tableView.delegate = self
-//        tableView.addTopBounceAreaView(color: Constants.Colors.green)
         return tableView
     }()
     
     // MARK: - Private Properties
     
+    private let headerHeightConstraint: NSLayoutConstraint!
+    
+    // header height
+    private let maxHeaderHeight: CGFloat = 224
+    private let minHeaderHeight: CGFloat = 56
+    private var previousScrollOffset: CGFloat = 0
+    
+    // Data source
     private lazy var bestPriceProducts = DataSource.getBestPriceProducts()
     private lazy var limitedOfferProducts = DataSource.getLimitedOfferProducts()
     private lazy var categories = DataSource.getCategories()
@@ -40,23 +49,26 @@ class MainViewController: UIViewController {
     
     // MARK: - Life Cycle
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constants.Colors.green
         
         setupLayout()
         addTopBounceAreaView()
+        setupDismissKeyboard()
     }
-    
-    
     
     // MARK: - Private Methods
     
-//    background color for the top of a UITableView
+    //    background color for the top of a UITableView
     private func addTopBounceAreaView() {
         var frame = UIScreen.main.bounds
         frame.origin.y = -frame.size.height
-
+        
         let view = UIView(frame: frame)
         view.backgroundColor = Constants.Colors.green
         
@@ -73,11 +85,21 @@ class MainViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    private func setupDismissKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = true
+        tableView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyboard() {
+        tableView.endEditing(true)
+    }
 }
 
 // MARK: - UITableViewDataSource
 
-extension MainViewController: UITableViewDataSource {
+extension SearchViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         sections.count
@@ -118,28 +140,26 @@ extension MainViewController: UITableViewDataSource {
             return limitedOfferCell
         }
     }
-    
-    
 }
 
 // MARK: - UITableViewDelegate
 
-extension MainViewController: UITableViewDelegate {
+extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch sections[section] {
         case .categories:
             return 224
         case .limitedOffer:
-            return 64
+            return 32
         case .bestPrice:
-            return 64
+            return 32
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch sections[section] {
         case .categories:
-            let categoriesHeaderView = SearchProductsHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 218))
+            let categoriesHeaderView = SearchProductsHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 224))
             return categoriesHeaderView
         case .limitedOffer:
             let productsHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 32))
@@ -153,8 +173,14 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 192
+        switch sections[indexPath.section] {
+        case .categories:
+            return 192
+        case .limitedOffer:
+            return 244
+        case .bestPrice:
+            return 244
+        }
         
     }
 }

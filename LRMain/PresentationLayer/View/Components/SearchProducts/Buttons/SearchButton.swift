@@ -26,7 +26,7 @@ class SearchButton: UIButton {
     private func setupUI() {
         layer.cornerRadius = Constants.cornerRadius
         backgroundColor = Constants.Colors.green
-        setImage(.searchIcon, for: .normal)
+        setImage(.searchMagnifier, for: .normal)
         tintColor = .white
     }
 }

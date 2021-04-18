@@ -50,7 +50,6 @@ class SearchView: UIView {
         setupLayout()
     }
     
-    
     private func setupLayout() {
         addSubview(searchTextField)
         addSubview(searchButton)
