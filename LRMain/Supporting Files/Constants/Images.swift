@@ -27,10 +27,10 @@ extension UIImage {
     // MARK: - Catalog
     
     static let dekor = UIImage(imageLiteralResourceName: "dekor")
-    static let instrumenty = UIImage(imageLiteralResourceName: "instrumenty")
-    static let osveshchenie = UIImage(imageLiteralResourceName: "osveshchenie")
-    static let sad = UIImage(imageLiteralResourceName: "sad")
-    static let stroymaterialy = UIImage(imageLiteralResourceName: "stroymaterialy")
+    static let instrumenti = UIImage(imageLiteralResourceName: "instrumenti")
+    static let osvesheniye = UIImage(imageLiteralResourceName: "osvesheniye")
+    static let garden = UIImage(imageLiteralResourceName: "garden")
+    static let stroymateriali = UIImage(imageLiteralResourceName: "stroymateriali")
 
     
     // MARK: - Best price products
