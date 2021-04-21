@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E820EB402629BB8C009217F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EB3F2629BB8C009217F0 /* AppDelegate.swift */; };
-		E820EB442629BB8C009217F0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EB432629BB8C009217F0 /* SearchViewController.swift */; };
+		E820EB442629BB8C009217F0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EB432629BB8C009217F0 /* HomeViewController.swift */; };
 		E820EB492629BB8D009217F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E820EB482629BB8D009217F0 /* Assets.xcassets */; };
 		E820EB4C2629BB8D009217F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E820EB4A2629BB8D009217F0 /* LaunchScreen.storyboard */; };
 		E820EB5B2629F021009217F0 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EB5A2629F021009217F0 /* DataSource.swift */; };
@@ -39,12 +39,18 @@
 		E820EC21262B643C009217F0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EC20262B643C009217F0 /* ProfileViewController.swift */; };
 		E820EC24262B644E009217F0 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EC23262B644E009217F0 /* CartViewController.swift */; };
 		E820EC27262B646B009217F0 /* ShopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EC26262B646B009217F0 /* ShopsViewController.swift */; };
+		E8AF26F4262DE2FD006E9457 /* CALayer+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF26F3262DE2FD006E9457 /* CALayer+Ext.swift */; };
+		E8AF26F7262E019F006E9457 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF26F6262E019F006E9457 /* UIImage+Ext.swift */; };
+		E8C8E8A82630948F00B30D6C /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8A72630948F00B30D6C /* PriceView.swift */; };
+		E8C8E8AB2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8AA2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift */; };
+		E8C8E8C32630D23D00B30D6C /* HomeViewControllerTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8C22630D23D00B30D6C /* HomeViewControllerTableViewDataSource.swift */; };
+		E8C8E8C62630DDBA00B30D6C /* Formatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8C52630DDBA00B30D6C /* Formatter+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E820EB3C2629BB8C009217F0 /* LRMain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LRMain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E820EB3F2629BB8C009217F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E820EB432629BB8C009217F0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E820EB432629BB8C009217F0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E820EB482629BB8D009217F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E820EB4B2629BB8D009217F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E820EB4D2629BB8D009217F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +82,12 @@
 		E820EC20262B643C009217F0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E820EC23262B644E009217F0 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		E820EC26262B646B009217F0 /* ShopsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsViewController.swift; sourceTree = "<group>"; };
+		E8AF26F3262DE2FD006E9457 /* CALayer+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Ext.swift"; sourceTree = "<group>"; };
+		E8AF26F6262E019F006E9457 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		E8C8E8A72630948F00B30D6C /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
+		E8C8E8AA2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTableViewDelegate.swift; sourceTree = "<group>"; };
+		E8C8E8C22630D23D00B30D6C /* HomeViewControllerTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTableViewDataSource.swift; sourceTree = "<group>"; };
+		E8C8E8C52630DDBA00B30D6C /* Formatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +182,9 @@
 		E820EB742629F9EB009217F0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E820EB432629BB8C009217F0 /* SearchViewController.swift */,
+				E820EB432629BB8C009217F0 /* HomeViewController.swift */,
+				E8C8E8AA2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift */,
+				E8C8E8C22630D23D00B30D6C /* HomeViewControllerTableViewDataSource.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -198,6 +212,9 @@
 			isa = PBXGroup;
 			children = (
 				E820EBAF262A1E94009217F0 /* UIColor+Ext.swift */,
+				E8AF26F3262DE2FD006E9457 /* CALayer+Ext.swift */,
+				E8AF26F6262E019F006E9457 /* UIImage+Ext.swift */,
+				E8C8E8C52630DDBA00B30D6C /* Formatter+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,6 +281,7 @@
 			children = (
 				E820EB822629FBCB009217F0 /* ProductCollectionViewCell.swift */,
 				E820EBDE262AF03A009217F0 /* ProductsTableViewCell.swift */,
+				E8C8E8A72630948F00B30D6C /* PriceView.swift */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -358,8 +376,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E820EB442629BB8C009217F0 /* SearchViewController.swift in Sources */,
+				E820EB442629BB8C009217F0 /* HomeViewController.swift in Sources */,
 				E820EB402629BB8C009217F0 /* AppDelegate.swift in Sources */,
+				E8C8E8AB2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift in Sources */,
 				E820EBC8262AE303009217F0 /* WatchAllView.swift in Sources */,
 				E820EB832629FBCB009217F0 /* ProductCollectionViewCell.swift in Sources */,
 				E820EBEA262B12EC009217F0 /* SearchProductsHeaderView.swift in Sources */,
@@ -367,10 +386,13 @@
 				E820EB7F2629FA72009217F0 /* CategoriesTableViewCell.swift in Sources */,
 				E820EC1D262B6420009217F0 /* BookmarkViewController.swift in Sources */,
 				E820EC18262B6354009217F0 /* MainTabBarViewController.swift in Sources */,
+				E8C8E8C62630DDBA00B30D6C /* Formatter+Ext.swift in Sources */,
+				E8AF26F7262E019F006E9457 /* UIImage+Ext.swift in Sources */,
 				E820EBC1262ADDFB009217F0 /* SearchButton.swift in Sources */,
 				E820EB5B2629F021009217F0 /* DataSource.swift in Sources */,
 				E820EBDB262AE78D009217F0 /* CategoryView.swift in Sources */,
 				E820EBD2262AE6C8009217F0 /* WatchAllCollectionViewCell.swift in Sources */,
+				E8C8E8A82630948F00B30D6C /* PriceView.swift in Sources */,
 				E820EB6D2629F660009217F0 /* Constants.swift in Sources */,
 				E820EB87262A04C4009217F0 /* ConfigurableView.swift in Sources */,
 				E820EBBD262A20A7009217F0 /* CatalogView.swift in Sources */,
@@ -379,8 +401,10 @@
 				E820EC21262B643C009217F0 /* ProfileViewController.swift in Sources */,
 				E820EBC4262ADE0D009217F0 /* BarCodeButton.swift in Sources */,
 				E820EBB4262A1EA3009217F0 /* Colors.swift in Sources */,
+				E8C8E8C32630D23D00B30D6C /* HomeViewControllerTableViewDataSource.swift in Sources */,
 				E820EB712629F66F009217F0 /* Images.swift in Sources */,
 				E820EBD8262AE75B009217F0 /* CategoryCollectionViewCell.swift in Sources */,
+				E8AF26F4262DE2FD006E9457 /* CALayer+Ext.swift in Sources */,
 				E820EBB0262A1E94009217F0 /* UIColor+Ext.swift in Sources */,
 				E820EBDF262AF03A009217F0 /* ProductsTableViewCell.swift in Sources */,
 				E820EC24262B644E009217F0 /* CartViewController.swift in Sources */,

@@ -41,6 +41,12 @@ class SearchView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public Methods
+    
+    func setSearchButtonAlpha(with alpha: CGFloat) {
+        searchButton.alpha = alpha
+    }
+    
     // MARK: - Private Methods
     
     private func setupView() {

@@ -33,9 +33,11 @@ class SearchProductsHeaderView: UIView {
         return barCodeButton
     }()
     
-    // MARK: - Private Property
+    // MARK: - Private Properties
     
     private let offset: CGFloat = 16
+    private var searchViewLeadingConstraint: NSLayoutConstraint!
+    private var searchViewBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Init
     
@@ -47,6 +49,26 @@ class SearchProductsHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Public Methods
+    
+    func changeLayout(with percentage: CGFloat) {
+        let subPercent = 1.0 - percentage
+        print(percentage)
+        
+        titleLabel.alpha = percentage
+        barCodeButton.alpha = percentage
+        
+        if percentage < 0.6 {
+            searchViewLeadingConstraint.constant = offset * (percentage)
+            searchViewBottomConstraint.constant = -offset * 2 * (percentage)
+        } else if percentage == 0 {
+            
+        }
+        
+        searchView.setSearchButtonAlpha(with: percentage)
+        backgroundColor = UIColor.blend(from: Constants.Colors.green, to: .white, percent: Double(subPercent))
     }
     
     // MARK: - Private Methods
@@ -62,11 +84,14 @@ class SearchProductsHeaderView: UIView {
         addSubview(searchView)
         addSubview(barCodeButton)
         
+        searchViewLeadingConstraint = searchView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+        searchViewBottomConstraint = searchView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset * 2)
+        
         NSLayoutConstraint.activate([
-            searchView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset * 2),
-            searchView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
+            searchViewBottomConstraint,
+            searchViewLeadingConstraint,
             searchView.trailingAnchor.constraint(greaterThanOrEqualTo: barCodeButton.leadingAnchor, constant: -offset),
-            searchView.heightAnchor.constraint(equalToConstant: 48),
+            searchView.heightAnchor.constraint(equalToConstant: offset * 3),
             
             barCodeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset),
             barCodeButton.centerYAnchor.constraint(equalTo: searchView.centerYAnchor),
@@ -74,7 +99,7 @@ class SearchProductsHeaderView: UIView {
             barCodeButton.widthAnchor.constraint(equalTo: barCodeButton.heightAnchor),
             
             titleLabel.bottomAnchor.constraint(equalTo: searchView.topAnchor, constant: -offset),
-            titleLabel.leadingAnchor.constraint(equalTo: searchView.leadingAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset),
         ])
     }
