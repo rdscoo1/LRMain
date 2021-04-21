@@ -28,7 +28,7 @@ class ProductsTableViewCell: UITableViewCell {
     
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 148, height: 200)
+        layout.itemSize = CGSize(width: 148, height: 240)
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 16
         return layout

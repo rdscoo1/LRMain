@@ -48,9 +48,9 @@ class HeaderView: UIView {
         addSubview(categoryLabel)
         
         NSLayoutConstraint.activate([
-            categoryLabel.topAnchor.constraint(equalTo: topAnchor, constant: offset / 2),
+            categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset),
+            categoryLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
             categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
-            categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
         ])
     }
 }

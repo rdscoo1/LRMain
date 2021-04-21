@@ -38,11 +38,11 @@ class DataSource {
     
     static func getCategories() -> [Category] {
         return [
-            .init(title: "Сад", image: .sad),
-            .init(title: "Освещение", image: .osveshchenie),
-            .init(title: "Декор", image: .dekor),
-            .init(title: "Стройматериалы", image: .stroymaterialy),
-            .init(title: "Инструменты", image: .instrumenty)
+            .init(title: "Сад", image: .garden),
+            .init(title: "Освещение", image: .osvesheniye),
+            .init(title: "Инструменты", image: .instrumenti),
+            .init(title: "Строймате-\nриалы", image: .stroymateriali),
+            .init(title: "Декор", image: .dekor)
         ]
     }
 }

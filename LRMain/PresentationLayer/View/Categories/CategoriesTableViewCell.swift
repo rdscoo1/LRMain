@@ -38,7 +38,7 @@ class CategoriesTableViewCell: UITableViewCell {
     
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 128, height: 124)
+        layout.itemSize = CGSize(width: 124, height: 124)
         layout.minimumLineSpacing = 16
         layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         layout.scrollDirection = .horizontal
@@ -72,11 +72,10 @@ class CategoriesTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
+            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 32),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-    
 }
 
 // MARK: - UICollectionViewDataSource

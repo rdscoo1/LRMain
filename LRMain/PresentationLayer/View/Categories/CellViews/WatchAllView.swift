@@ -24,7 +24,7 @@ class WatchAllView: UIView {
         label.textAlignment = .center
         label.text = "Смотреть всё"
         label.textColor = .black
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 15, weight: .medium)
         return label
     }()
     
@@ -58,12 +58,12 @@ class WatchAllView: UIView {
         addSubview(watchAllLabel)
         
         NSLayoutConstraint.activate([
-            nextButton.heightAnchor.constraint(equalToConstant: offset * 6),
-            nextButton.widthAnchor.constraint(equalToConstant: offset * 6),
-            nextButton.topAnchor.constraint(equalTo: topAnchor, constant: offset * 3),
+            nextButton.heightAnchor.constraint(equalToConstant: offset * 5),
+            nextButton.widthAnchor.constraint(equalToConstant: offset * 5),
+            nextButton.topAnchor.constraint(equalTo: topAnchor, constant: offset * 4),
             nextButton.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-            watchAllLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset * 2),
+            watchAllLabel.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: offset),
             watchAllLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
             watchAllLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
         ])

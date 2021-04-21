@@ -64,4 +64,26 @@ extension UIColor {
             self.init(white: 1, alpha: alpha)
         }
     }
+    
+    static func blend(from: UIColor, to: UIColor, percent: Double) -> UIColor {
+        var fR : CGFloat = 0.0
+        var fG : CGFloat = 0.0
+        var fB : CGFloat = 0.0
+        var tR : CGFloat = 0.0
+        var tG : CGFloat = 0.0
+        var tB : CGFloat = 0.0
+
+        from.getRed(&fR, green: &fG, blue: &fB, alpha: nil)
+        to.getRed(&tR, green: &tG, blue: &tB, alpha: nil)
+
+        let dR = tR - fR
+        let dG = tG - fG
+        let dB = tB - fB
+
+        let rR = fR + dR * CGFloat(percent)
+        let rG = fG + dG * CGFloat(percent)
+        let rB = fB + dB * CGFloat(percent)
+
+        return UIColor(red: rR, green: rG, blue: rB, alpha: 1.0)
+    }
 }

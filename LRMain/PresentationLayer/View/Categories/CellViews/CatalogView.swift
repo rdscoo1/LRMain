@@ -62,10 +62,10 @@ class CatalogView: UIView {
             catalogLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
             catalogLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset),
             
-            catalogIconImageView.heightAnchor.constraint(equalToConstant: offset * 3),
-            catalogIconImageView.widthAnchor.constraint(equalToConstant: offset * 3 - 4),
-            catalogIconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
-            catalogIconImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+            catalogIconImageView.heightAnchor.constraint(equalToConstant: 32),
+            catalogIconImageView.widthAnchor.constraint(equalTo: catalogIconImageView.heightAnchor),
+            catalogIconImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset),
+            catalogIconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset)
         ])
     }
 }

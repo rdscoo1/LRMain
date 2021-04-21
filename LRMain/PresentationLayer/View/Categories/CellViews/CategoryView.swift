@@ -17,7 +17,7 @@ class CategoryView: UIView {
         label.text = "Категория"
         label.textColor = .black
         label.numberOfLines = 2
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .systemFont(ofSize: 15, weight: .medium)
         return label
     }()
     
@@ -29,7 +29,7 @@ class CategoryView: UIView {
     
     // MARK: - Private Property
     
-    private let offset: CGFloat = 16
+    private let offset: CGFloat = 12
     
     // MARK: - Init
     
@@ -68,12 +68,12 @@ class CategoryView: UIView {
         NSLayoutConstraint.activate([
             categoryLabel.topAnchor.constraint(equalTo: topAnchor, constant: offset),
             categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
-            categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset),
+            categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             
-            categoryImageView.heightAnchor.constraint(equalToConstant: offset * 6),
-            categoryImageView.widthAnchor.constraint(equalToConstant: offset * 6),
-            categoryImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: offset * 2),
-            categoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: offset)
+            categoryImageView.heightAnchor.constraint(equalToConstant: 80),
+            categoryImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            categoryImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            categoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }

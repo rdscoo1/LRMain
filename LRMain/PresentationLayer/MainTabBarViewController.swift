@@ -28,7 +28,7 @@ class MainTabBarViewController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        let searchViewController = getTabBarItem(for: SearchViewController(),
+        let searchViewController = getTabBarItem(for: HomeViewController(),
                                                  title: "Главная",
                                                  image: .searchIcon,
                                                  tag: 0)
