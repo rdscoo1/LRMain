@@ -34,6 +34,7 @@ class PriceView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 12, weight: .bold)
         label.numberOfLines = 1
+        label.contentHuggingPriority(for: .horizontal)
         label.text = "₽/шт."
         return label
     }()

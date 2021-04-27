@@ -32,7 +32,7 @@ class HomeViewControllerTableViewDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch sections[section] {
         case .categories:
-            return 0
+            return 172
         case .limitedOffer:
             return 108
         case .bestPrice:
@@ -43,8 +43,8 @@ class HomeViewControllerTableViewDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch sections[section] {
         case .categories:
-            //            let categoriesHeaderView = SearchProductsHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 224))
-            return UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0))
+            let categoriesHeaderView = SearchProductsHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 172))
+            return categoriesHeaderView
         case .limitedOffer:
             let productsHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 108))
             productsHeaderView.setTitle("Предложение ограничено")

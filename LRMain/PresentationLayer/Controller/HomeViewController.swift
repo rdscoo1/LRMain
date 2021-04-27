@@ -17,28 +17,26 @@ class HomeViewController: UIViewController {
     
     // MARK: - UI
     
-    private lazy var searchProductsHeaderView: SearchProductsHeaderView = {
-        let searchProductsHeaderView = SearchProductsHeaderView()
-        searchProductsHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        return searchProductsHeaderView
-    }()
-    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: CategoriesTableViewCell.reuseId)
-        tableView.register(ProductsTableViewCell.self, forCellReuseIdentifier: ProductsTableViewCell.reuseId)
+        tableView.register(CategoriesTableViewCell.self,
+                           forCellReuseIdentifier: CategoriesTableViewCell.reuseId)
+        tableView.register(ProductsTableViewCell.self,
+                           forCellReuseIdentifier: ProductsTableViewCell.reuseId)
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
-//                tableView.contentInsetAdjustmentBehavior = .never
         tableView.keyboardDismissMode = .onDrag
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = Constants.Colors.green
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
         tableView.dataSource = tableViewDataSource
         tableView.delegate = tableViewDelegate
         return tableView
     }()
+    
+    private var refreshControl: UIRefreshControl?
     
     private lazy var tableViewDataSource = HomeViewControllerTableViewDataSource()
     private lazy var tableViewDelegate = HomeViewControllerTableViewDelegate()
@@ -58,45 +56,46 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Constants.Colors.green
         
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        let bigFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 1000))
+        bigFooterView.backgroundColor = UIColor.white
+        bigFooterView.isOpaque = true
+        tableView.tableFooterView?.addSubview(bigFooterView)
+        
         setupLayout()
-        //        addTopBounceAreaView()
         setupDismissKeyboard()
     }
     
     // MARK: - Private Methods
-    
-    //    //    background color for the top of a UITableView
-    //    private func addTopBounceAreaView() {
-    //        var frame = UIScreen.main.bounds
-    //        frame.origin.y = -frame.size.height
-    //
-    //        let view = UIView(frame: frame)
-    //        view.backgroundColor = Constants.Colors.green
-    //
-    //        tableView.addSubview(view)
-    //    }
     
     //    ❗️❗️❗️
     //    let newStatusBarStyle: UIStatusBarStyle = percentage < 0.5 ? .lightContent : .default
     //            if UIApplication.shared.statusBarStyle != newStatusBarStyle { UIApplication.shared.statusBarStyle = newStatusBarStyle }
     
     private func setupLayout() {
-        view.addSubview(searchProductsHeaderView)
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = .white
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
         view.addSubview(tableView)
         
-        headerHeightConstraint = searchProductsHeaderView.heightAnchor.constraint(equalToConstant: maxHeaderHeight)
+//        headerHeightConstraint = searchProductsHeaderView.heightAnchor.constraint(equalToConstant: maxHeaderHeight)
         
         NSLayoutConstraint.activate([
-            searchProductsHeaderView.topAnchor.constraint(equalTo: view.topAnchor),
-            searchProductsHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            searchProductsHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerHeightConstraint,
-            
-            tableView.topAnchor.constraint(equalTo: searchProductsHeaderView.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    @objc private func refresh(sender:AnyObject) {
+        refreshControl?.beginRefreshing()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.refreshControl?.endRefreshing()
+        }
     }
     
     private func setupDismissKeyboard() {
@@ -163,9 +162,9 @@ extension HomeViewController {
         
         print("openAmount \(openAmount)")
         // Calculate the percentage to animate, change the UI element
-        let percentage = openAmount / range
-    
-        searchProductsHeaderView.changeLayout(with: percentage)
+        _ = openAmount / range
+        
+//        searchProductsHeaderView.changeLayout(with: percentage)
     }
 }
 
@@ -196,7 +195,7 @@ extension HomeViewController {
         }
         
         if newHeight != self.headerHeightConstraint.constant {
-            let alpha = max(0, (0.5 - min(scrollView.contentInset.top, newHeight) / -scrollView.contentOffset.y) / 0.5)
+//            _ = max(0, (0.5 - min(scrollView.contentInset.top, newHeight_llView.contentOffset.y) / 0.5)
             
             //            print(alpha)
             headerHeightConstraint.constant = newHeight

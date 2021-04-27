@@ -29,6 +29,7 @@ class HeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
+        backgroundColor = .white
         setupLayout()
     }
     

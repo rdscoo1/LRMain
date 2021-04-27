@@ -14,23 +14,26 @@ class ProductsTableViewCell: UITableViewCell {
     // MARK: - UI
     
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(ProductCollectionViewCell.self,
                                 forCellWithReuseIdentifier: ProductCollectionViewCell.reuseId)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .white
+        collectionView.decelerationRate = .fast
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
-    private lazy var layout: UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
+    private lazy var layout: CarouselCollectionViewLayout = {
+        let layout = CarouselCollectionViewLayout()
         layout.itemSize = CGSize(width: 148, height: 240)
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 16
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         return layout
     }()
     
@@ -61,7 +64,6 @@ class ProductsTableViewCell: UITableViewCell {
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-    
 }
 
 // MARK: - UICollectionViewDataSource

@@ -7,9 +7,9 @@
 
 import UIKit
 
-enum CatalogSections {
+enum CatalogCells {
     case catalog
-    case categories([Category])
+    case categories(Category)
     case watchAll
 }
 
@@ -20,7 +20,8 @@ class CategoriesTableViewCell: UITableViewCell {
     // MARK: - UI
     
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CatalogCollectionViewCell.self,
                                 forCellWithReuseIdentifier: CatalogCollectionViewCell.reuseId)
@@ -31,33 +32,42 @@ class CategoriesTableViewCell: UITableViewCell {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .white
+        collectionView.decelerationRate = .fast
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
-    private lazy var layout: UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
+    private lazy var layout: CarouselCollectionViewLayout = {
+        let layout = CarouselCollectionViewLayout()
         layout.itemSize = CGSize(width: 124, height: 124)
-        layout.minimumLineSpacing = 16
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 16
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         return layout
     }()
+
     
     // MARK: - Private Properties
     
-    private lazy var catalogSections: [CatalogSections] = [.catalog, .categories(categories), .watchAll]
+    private lazy var catalogCells: [CatalogCells] = [.catalog]
     
     // MARK: - Public Properties
     
-    var categories: [Category] = []
+    var categories: [Category] = [] {
+        didSet {
+            for category in categories {
+                catalogCells.append(.categories(category))
+            }
+            catalogCells.insert(.watchAll, at: categories.count + 1)
+        }
+    }
     
     // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+                
         setupLayout()
     }
     
@@ -81,36 +91,27 @@ class CategoriesTableViewCell: UITableViewCell {
 // MARK: - UICollectionViewDataSource
 
 extension CategoriesTableViewCell: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return catalogSections.count
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch catalogSections[section] {
-        case .catalog:
-            return 1
-        case .categories(let items):
-            return items.count
-        case .watchAll:
-            return 1
-        }
+        return catalogCells.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch catalogSections[indexPath.section] {
+        let cellModel = catalogCells[indexPath.row]
+        
+        switch cellModel {
         case .catalog:
             guard let catalogCell = collectionView.dequeueReusableCell(withReuseIdentifier: CatalogCollectionViewCell.reuseId, for: indexPath) as? CatalogCollectionViewCell
             else {
                 fatalError("Expected cell with reuse identifier: \(CatalogCollectionViewCell.reuseId)")
             }
             return catalogCell
-        case .categories(let items):
+        case .categories(let item):
             guard let categoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.reuseId, for: indexPath) as? CategoryCollectionViewCell else {
                 fatalError("Expected cell with reuse identifier: \(CategoryCollectionViewCell.reuseId)")
             }
             
-            let category = items[indexPath.item]
-            categoryCell.configure(with: category)
+//            let category = items[indexPath.item]
+            categoryCell.configure(with: item)
             
             return categoryCell
         case .watchAll:

@@ -40,11 +40,11 @@
 		E820EC24262B644E009217F0 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EC23262B644E009217F0 /* CartViewController.swift */; };
 		E820EC27262B646B009217F0 /* ShopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EC26262B646B009217F0 /* ShopsViewController.swift */; };
 		E8AF26F4262DE2FD006E9457 /* CALayer+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF26F3262DE2FD006E9457 /* CALayer+Ext.swift */; };
-		E8AF26F7262E019F006E9457 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF26F6262E019F006E9457 /* UIImage+Ext.swift */; };
 		E8C8E8A82630948F00B30D6C /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8A72630948F00B30D6C /* PriceView.swift */; };
 		E8C8E8AB2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8AA2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift */; };
 		E8C8E8C32630D23D00B30D6C /* HomeViewControllerTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8C22630D23D00B30D6C /* HomeViewControllerTableViewDataSource.swift */; };
 		E8C8E8C62630DDBA00B30D6C /* Formatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8C52630DDBA00B30D6C /* Formatter+Ext.swift */; };
+		E8E0E19F2634E0280078729A /* CarouselCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0E19E2634E0280078729A /* CarouselCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,11 +83,11 @@
 		E820EC23262B644E009217F0 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		E820EC26262B646B009217F0 /* ShopsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsViewController.swift; sourceTree = "<group>"; };
 		E8AF26F3262DE2FD006E9457 /* CALayer+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Ext.swift"; sourceTree = "<group>"; };
-		E8AF26F6262E019F006E9457 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		E8C8E8A72630948F00B30D6C /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
 		E8C8E8AA2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTableViewDelegate.swift; sourceTree = "<group>"; };
 		E8C8E8C22630D23D00B30D6C /* HomeViewControllerTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTableViewDataSource.swift; sourceTree = "<group>"; };
 		E8C8E8C52630DDBA00B30D6C /* Formatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Ext.swift"; sourceTree = "<group>"; };
+		E8E0E19E2634E0280078729A /* CarouselCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +147,7 @@
 				E820EB482629BB8D009217F0 /* Assets.xcassets */,
 				E820EB4A2629BB8D009217F0 /* LaunchScreen.storyboard */,
 				E820EB4D2629BB8D009217F0 /* Info.plist */,
+				E8E0E19E2634E0280078729A /* CarouselCollectionViewLayout.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -213,7 +214,6 @@
 			children = (
 				E820EBAF262A1E94009217F0 /* UIColor+Ext.swift */,
 				E8AF26F3262DE2FD006E9457 /* CALayer+Ext.swift */,
-				E8AF26F6262E019F006E9457 /* UIImage+Ext.swift */,
 				E8C8E8C52630DDBA00B30D6C /* Formatter+Ext.swift */,
 			);
 			path = Extensions;
@@ -387,7 +387,6 @@
 				E820EC1D262B6420009217F0 /* BookmarkViewController.swift in Sources */,
 				E820EC18262B6354009217F0 /* MainTabBarViewController.swift in Sources */,
 				E8C8E8C62630DDBA00B30D6C /* Formatter+Ext.swift in Sources */,
-				E8AF26F7262E019F006E9457 /* UIImage+Ext.swift in Sources */,
 				E820EBC1262ADDFB009217F0 /* SearchButton.swift in Sources */,
 				E820EB5B2629F021009217F0 /* DataSource.swift in Sources */,
 				E820EBDB262AE78D009217F0 /* CategoryView.swift in Sources */,
@@ -397,6 +396,7 @@
 				E820EB87262A04C4009217F0 /* ConfigurableView.swift in Sources */,
 				E820EBBD262A20A7009217F0 /* CatalogView.swift in Sources */,
 				E820EBCC262AE311009217F0 /* NextButton.swift in Sources */,
+				E8E0E19F2634E0280078729A /* CarouselCollectionViewLayout.swift in Sources */,
 				E820EC07262B1BAD009217F0 /* SearchView.swift in Sources */,
 				E820EC21262B643C009217F0 /* ProfileViewController.swift in Sources */,
 				E820EBC4262ADE0D009217F0 /* BarCodeButton.swift in Sources */,
