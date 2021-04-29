@@ -33,11 +33,16 @@ class SearchProductsHeaderView: UIView {
         return barCodeButton
     }()
     
+    // MARK: - Public Properties
+    
+    var headerHeightConstraint: NSLayoutConstraint!
+    var searchViewLeadingConstraint: NSLayoutConstraint!
+    var searchViewBottomConstraint: NSLayoutConstraint!
+    
     // MARK: - Private Properties
     
     private let offset: CGFloat = 16
-    private var searchViewLeadingConstraint: NSLayoutConstraint!
-    private var searchViewBottomConstraint: NSLayoutConstraint!
+    
     
     // MARK: - Init
     
@@ -55,14 +60,13 @@ class SearchProductsHeaderView: UIView {
     
     func changeLayout(with percentage: CGFloat) {
         let subPercent = 1.0 - percentage
-        print(percentage)
         
         titleLabel.alpha = percentage
         barCodeButton.alpha = percentage
         
         if percentage < 0.6 {
-            searchViewLeadingConstraint.constant = offset * (percentage)
-            searchViewBottomConstraint.constant = -offset * 2 * (percentage)
+            searchViewLeadingConstraint.constant = offset * 5 * (percentage)
+            searchViewBottomConstraint.constant = -offset * 5 * (percentage)
         } else if percentage == 0 {
             
         }
@@ -84,6 +88,7 @@ class SearchProductsHeaderView: UIView {
         addSubview(searchView)
         addSubview(barCodeButton)
         
+        headerHeightConstraint = heightAnchor.constraint(equalTo: self.heightAnchor)
         searchViewLeadingConstraint = searchView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
         searchViewBottomConstraint = searchView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset * 2)
         

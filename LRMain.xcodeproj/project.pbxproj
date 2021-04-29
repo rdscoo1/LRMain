@@ -39,6 +39,7 @@
 		E820EC21262B643C009217F0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EC20262B643C009217F0 /* ProfileViewController.swift */; };
 		E820EC24262B644E009217F0 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EC23262B644E009217F0 /* CartViewController.swift */; };
 		E820EC27262B646B009217F0 /* ShopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E820EC26262B646B009217F0 /* ShopsViewController.swift */; };
+		E86A347B2637DE7400711AC0 /* CollapsedSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86A347A2637DE7400711AC0 /* CollapsedSearchBar.swift */; };
 		E8AF26F4262DE2FD006E9457 /* CALayer+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF26F3262DE2FD006E9457 /* CALayer+Ext.swift */; };
 		E8C8E8A82630948F00B30D6C /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8A72630948F00B30D6C /* PriceView.swift */; };
 		E8C8E8AB2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8E8AA2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift */; };
@@ -82,6 +83,7 @@
 		E820EC20262B643C009217F0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E820EC23262B644E009217F0 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		E820EC26262B646B009217F0 /* ShopsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsViewController.swift; sourceTree = "<group>"; };
+		E86A347A2637DE7400711AC0 /* CollapsedSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedSearchBar.swift; sourceTree = "<group>"; };
 		E8AF26F3262DE2FD006E9457 /* CALayer+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Ext.swift"; sourceTree = "<group>"; };
 		E8C8E8A72630948F00B30D6C /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
 		E8C8E8AA2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTableViewDelegate.swift; sourceTree = "<group>"; };
@@ -139,7 +141,6 @@
 		E820EB672629F1CD009217F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E820EC1B262B63E8009217F0 /* OtherViewControllers */,
 				E820EBAE262A1E83009217F0 /* Extensions */,
 				E820EB85262A04B5009217F0 /* Protocols */,
 				E820EB6B2629F657009217F0 /* Constants */,
@@ -193,6 +194,7 @@
 		E820EB762629FA0E009217F0 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				E820EC1B262B63E8009217F0 /* TabViewControllers */,
 				E820EB742629F9EB009217F0 /* Controller */,
 				E820EB732629F9E2009217F0 /* View */,
 				E820EB5D2629F045009217F0 /* Model */,
@@ -232,6 +234,7 @@
 			children = (
 				E820EC04262B1B89009217F0 /* SearchProducts */,
 				E820EBE6262B0FFA009217F0 /* HeaderView.swift */,
+				E86A347A2637DE7400711AC0 /* CollapsedSearchBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -296,7 +299,7 @@
 			path = CellViews;
 			sourceTree = "<group>";
 		};
-		E820EC1B262B63E8009217F0 /* OtherViewControllers */ = {
+		E820EC1B262B63E8009217F0 /* TabViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				E820EC1C262B6420009217F0 /* BookmarkViewController.swift */,
@@ -304,7 +307,7 @@
 				E820EC23262B644E009217F0 /* CartViewController.swift */,
 				E820EC26262B646B009217F0 /* ShopsViewController.swift */,
 			);
-			path = OtherViewControllers;
+			path = TabViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +384,7 @@
 				E8C8E8AB2630D08C00B30D6C /* HomeViewControllerTableViewDelegate.swift in Sources */,
 				E820EBC8262AE303009217F0 /* WatchAllView.swift in Sources */,
 				E820EB832629FBCB009217F0 /* ProductCollectionViewCell.swift in Sources */,
+				E86A347B2637DE7400711AC0 /* CollapsedSearchBar.swift in Sources */,
 				E820EBEA262B12EC009217F0 /* SearchProductsHeaderView.swift in Sources */,
 				E820EB5F2629F04E009217F0 /* Product.swift in Sources */,
 				E820EB7F2629FA72009217F0 /* CategoriesTableViewCell.swift in Sources */,

@@ -32,23 +32,48 @@ class HomeViewController: UIViewController {
         tableView.backgroundColor = Constants.Colors.green
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
         tableView.dataSource = tableViewDataSource
-        tableView.delegate = tableViewDelegate
+        tableView.delegate = self
         return tableView
+    }()
+    
+    private lazy var collapsedSearchBar: CollapsedSearchBar = {
+        let collapsedSearchBar = CollapsedSearchBar()
+        collapsedSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        collapsedSearchBar.isHidden = true
+        return collapsedSearchBar
+    }()
+    
+    private lazy var navigationView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.isHidden = true
+        return view
     }()
     
     private var refreshControl: UIRefreshControl?
     
-    private lazy var tableViewDataSource = HomeViewControllerTableViewDataSource()
-    private lazy var tableViewDelegate = HomeViewControllerTableViewDelegate()
+    var categoriesHeaderView: SearchProductsHeaderView?
     
     // MARK: - Private Properties
     
+    private lazy var tableViewDataSource = HomeViewControllerTableViewDataSource()
+    private lazy var tableViewDelegate = HomeViewControllerTableViewDelegate()
+    
     private var headerHeightConstraint: NSLayoutConstraint!
+    
+    private lazy var sections: [Sections] = [.categories(categories), .limitedOffer(limitedOfferProducts), .bestPrice(bestPriceProducts)]
+    
+    
+    //MARK: - Data source
+    private lazy var bestPriceProducts = DataSource.getBestPriceProducts()
+    private lazy var limitedOfferProducts = DataSource.getLimitedOfferProducts()
+    private lazy var categories = DataSource.getCategories()
     
     // header height
     private let maxHeaderHeight: CGFloat = 224
     private let minHeaderHeight: CGFloat = 96
-    private var previousScrollOffset: CGFloat = 0
+    private var previousScrollOffset = CGPoint.zero
     
     // MARK: - Life Cycle
     
@@ -73,20 +98,33 @@ class HomeViewController: UIViewController {
     //            if UIApplication.shared.statusBarStyle != newStatusBarStyle { UIApplication.shared.statusBarStyle = newStatusBarStyle }
     
     private func setupLayout() {
+        let headerView = tableView.tableHeaderView as? SearchProductsHeaderView
+        headerHeightConstraint = headerView?.headerHeightConstraint
+        
         refreshControl = UIRefreshControl()
         refreshControl?.tintColor = .white
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
         view.addSubview(tableView)
-        
-//        headerHeightConstraint = searchProductsHeaderView.heightAnchor.constraint(equalToConstant: maxHeaderHeight)
+        view.addSubview(navigationView)
+        view.addSubview(collapsedSearchBar)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            navigationView.topAnchor.constraint(equalTo: view.topAnchor),
+            navigationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navigationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationView.heightAnchor.constraint(equalToConstant: 44),
+            
+            collapsedSearchBar.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
+            collapsedSearchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collapsedSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collapsedSearchBar.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
     
@@ -153,6 +191,8 @@ extension HomeViewController {
     }
     
     private func updateHeader() {
+        let headerView = tableView.tableHeaderView as? SearchProductsHeaderView
+        
         // Calculate the distance between 2 value max and min height
         let range = maxHeaderHeight - minHeaderHeight
         print("range \(range)")
@@ -162,59 +202,163 @@ extension HomeViewController {
         
         print("openAmount \(openAmount)")
         // Calculate the percentage to animate, change the UI element
-        _ = openAmount / range
+        let percentage = openAmount / range
         
-//        searchProductsHeaderView.changeLayout(with: percentage)
+        headerView?.changeLayout(with: percentage)
     }
 }
 
 // MARK: - ScrollView Delegate
 
-extension HomeViewController {
+extension HomeViewController: UITableViewDelegate {
+    
+    // MARK: - TableView Delegate Methods
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch sections[indexPath.section] {
+        case .categories:
+            return 156
+        case .limitedOffer:
+            return 244
+        case .bestPrice:
+            return 244
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch sections[section] {
+        case .categories:
+            return 172
+        case .limitedOffer:
+            return 108
+        case .bestPrice:
+            return 108
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch sections[section] {
+        case .categories:
+            categoriesHeaderView = SearchProductsHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 172))
+            return categoriesHeaderView
+        case .limitedOffer:
+            let productsHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 108))
+            productsHeaderView.setTitle("Предложение ограничено")
+            return productsHeaderView
+        case .bestPrice:
+            let productsHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 108))
+            productsHeaderView.setTitle("Лучшая цена")
+            return productsHeaderView
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        nil
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let scrollDiff = scrollView.contentOffset.y - previousScrollOffset
+        //ScrollView's contentOffset differences with previous contentOffset
+        let contentOffset =  scrollView.contentOffset.y - previousScrollOffset.y
         
-        // The top limit of scroll view
-        let absoluteTop: CGFloat = 0.0
-        // The bottom limit of scroll view
-        let absoluteBottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
+        //        print(scrollView.contentOffset.y)
         
-        let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
-        let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
-        
-        guard canAnimateHeader(scrollView) else {
-            return
-        }
-        
-        // Implement logic to animate header
-        var newHeight = headerHeightConstraint.constant
-        if isScrollingDown {
-            newHeight = max(minHeaderHeight, headerHeightConstraint.constant - abs(scrollDiff))
-        } else if isScrollingUp {
-            newHeight = min(maxHeaderHeight, headerHeightConstraint.constant + abs(scrollDiff))
-        }
-        
-        if newHeight != self.headerHeightConstraint.constant {
-//            _ = max(0, (0.5 - min(scrollView.contentInset.top, newHeight_llView.contentOffset.y) / 0.5)
+        // Scrolls UP - we compress the top view
+        if contentOffset > 0 && scrollView.contentOffset.y > 0 {
+            if contentOffset > 0  {
+                let percentage = 47 / (scrollView.contentOffset.y * 47)
+                print(percentage)
+                categoriesHeaderView?.changeLayout(with: percentage)
+                
+                if percentage < 0.013 {
+                    collapsedSearchBar.isHidden = false
+                    navigationView.isHidden = false
+                } else {
+                    collapsedSearchBar.isHidden = true
+                    navigationView.isHidden = true
+                }
+            } else {
+                categoriesHeaderView?.alpha = 1.0
+            }
             
-            //            print(alpha)
-            headerHeightConstraint.constant = newHeight
-            updateHeader()
-            setScrollPosition(previousScrollOffset)
+            print("Scrolls UP")
+            //                       scrollView.contentOffset.y -= contentOffset
         }
         
-        previousScrollOffset = scrollView.contentOffset.y
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // Finish scrolling
-        scrollViewDidStopScrolling()
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            // Finish scrolling
-            scrollViewDidStopScrolling()
+        // Scrolls Down - we expand the top view
+        if contentOffset < 0 && scrollView.contentOffset.y < 0 {
+            navigationView.isHidden = true
+            collapsedSearchBar.isHidden = true
+            print("Scrolls Down")
+            //                scrollView.contentOffset.y -= contentOffset
+            
         }
+        previousScrollOffset = scrollView.contentOffset
+        
+        
+        
+        //        let contentOffset = scrollView.contentOffset.y
+        //
+        //        var percentage: CGFloat = 0
+        //
+        //        if contentOffset < 0 {
+        //            percentage = abs(contentOffset) / 5
+        //        }
+        //
+        //
+        //
+        //        print("contentOffset", contentOffset)
     }
 }
+
+//extension HomeViewController {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let scrollDiff = scrollView.contentOffset.y - previousScrollOffset
+//
+//        // The top limit of scroll view
+//        let absoluteTop: CGFloat = 0.0
+//        // The bottom limit of scroll view
+//        let absoluteBottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
+//
+//        let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
+//        let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
+//
+//        guard canAnimateHeader(scrollView) else {
+//            return
+//        }
+//
+//        // Implement logic to animate header
+//        var newHeight = headerHeightConstraint.constant
+//        if isScrollingDown {
+//            newHeight = max(minHeaderHeight, headerHeightConstraint.constant - abs(scrollDiff))
+//        } else if isScrollingUp {
+//            newHeight = min(maxHeaderHeight, headerHeightConstraint.constant + abs(scrollDiff))
+//        }
+//
+//        if newHeight != self.headerHeightConstraint.constant {
+////            _ = max(0, (0.5 - min(scrollView.contentInset.top, newHeight_llView.contentOffset.y) / 0.5)
+//
+//            //            print(alpha)
+//            headerHeightConstraint.constant = newHeight
+//            updateHeader()
+//            setScrollPosition(previousScrollOffset)
+//        }
+//
+//        previousScrollOffset = scrollView.contentOffset.y
+//    }
+//
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        // Finish scrolling
+//        scrollViewDidStopScrolling()
+//    }
+//
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        if !decelerate {
+//            // Finish scrolling
+//            scrollViewDidStopScrolling()
+//        }
+//    }
+//}

@@ -10,6 +10,7 @@ import UIKit
 class HomeViewControllerTableViewDataSource: NSObject, UITableViewDataSource {
     
     //MARK: - Data source
+    
     private lazy var bestPriceProducts = DataSource.getBestPriceProducts()
     private lazy var limitedOfferProducts = DataSource.getLimitedOfferProducts()
     private lazy var categories = DataSource.getCategories()
